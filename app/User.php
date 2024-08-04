@@ -47,7 +47,7 @@ class User extends Authenticatable
 
     //中間テーブル　デタッチ
     public function unfollow(Int $user_id){
-
+        return $this->follows()->detach($user_id);
     }
     //フォローの人数取得
     public function isFollowing(Int $user_id){

@@ -27,7 +27,7 @@
                 {!! form::submit('フォロー',['btn btn-primary'])!!}
                 {!! Form::close() !!}
 
-                {!! Form::open(['url' => '/user/' . $user->id,'method' =>'post']) !!}
+                {!! Form::open(['url' => '/user/unfollow/' . $user->id,'method' =>'post']) !!} <!--unfolloｗのweb.phpのURLに変更-->
                 {!! form::submit('フォロー解除',['btn btn-primary'])!!}
               {!! Form::close() !!}
             </li>

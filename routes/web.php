@@ -54,7 +54,7 @@ Route::post('/post/create','PostsController@create');
 
 //フォロー機能
 Route::post('/user/{id}','FollowsController@follow');
-Route::get('/user/{id}/unfollow','FollowsController@unfollow');
+Route::post('/user/unfollow/{id}','FollowsController@unfollow');//getからpostに変更．．/user/{id}/unfollow/→/user/unfollow/{id}
 });
  //削除機能
  Route::get('/post/{id}/delete','PostsController@destroy');
