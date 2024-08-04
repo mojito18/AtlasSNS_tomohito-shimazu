@@ -7,6 +7,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    //リレーション１対多
+    public function posts(){
+        return $this->hasMany('App\Post');
+}
     use Notifiable;
 
     /**
@@ -15,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'mail', 'password',
+        'username', 'mail', 'password',//カラム名
     ];
 
     /**
@@ -26,4 +30,35 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    //followingの多対多
+    public function follows(){
+            return $this->belongsToMany('App\User', 'follows', 'following_id', 'followed_id');//followsテーブルのカラム
+    }
+
+    //followedの多対多
+    public function followers(){
+            return $this->belongsToMany('App\User', 'follows', 'following_id', 'followed_id');
+    }
+
+    //中間テーブル　アタッチ
+    public function follow(Int $user_id){
+        return $this->follows()->attach($user_id);
+    }
+
+    //中間テーブル　デタッチ
+    public function unfollow(Int $user_id){
+
+    }
+    //フォローの人数取得
+    public function isFollowing(Int $user_id){
+        // dd($user_id);
+        return (boolean) $this->follows()->where('followed_id',$user_id)->first
+        (['follows.id']);
+        //booleanは重複しないようにすでにフォローしているかしていないかを「真偽値」で返している
+    }
+    //フォローワーの取得人数
+    public function isFollowed(Int $user_id){
+        return (boolean) $this->followers()->where('followed_id',$user_id)->first(['follows.id']);
+    }
+
 }
