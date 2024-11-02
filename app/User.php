@@ -37,8 +37,19 @@ class User extends Authenticatable
 
     //followedの多対多
     public function followers(){
-            return $this->belongsToMany('App\User', 'follows', 'following_id', 'followed_id');
+            return $this->belongsToMany('App\User', 'follows', 'followed_id', 'following_id');//カラムの順番によってどちらに自分を入れるのかにって順番が変わる/3番が自分
     }
+
+//フォローカウント
+    public function followingCount()
+{
+    return $this->follows()->count();
+}
+//フォロワーカウント
+public function followersCount()
+{
+    return $this->followers()->count();
+}
 
     //中間テーブル　アタッチ
     public function follow(Int $user_id){
@@ -47,7 +58,7 @@ class User extends Authenticatable
 
     //中間テーブル　デタッチ
     public function unfollow(Int $user_id){
-        return $this->follows()->detach($user_id);
+        return $this->follows()->detach($user_id);//followsは登録するテーブルを記載
     }
     //フォローの人数取得
     public function isFollowing(Int $user_id){

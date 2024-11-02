@@ -21,16 +21,21 @@
   @endif
 <!-- endif消した -->
     <ul>
+      <!--3段構成-->
       @foreach($users as $user) <!--Userscontrollerから反映①-->
-              <li>{{ $user->username }}
+              {{ $user->username }}
+              <!-- ユーザーテーブルから名前（カラム）を引っ張ってくる -->
+                <!--ログインしているユーザーがユーザーを（$user）フォローしていない場合-->
+      @if(Auth::user()->isFollowing($user->id))
+      <!-- userテーブルからidを取り出す（カラム） -->
+                {!! Form::open(['url' => '/user/unfollow/' . $user->id,'method' =>'post']) !!} <!--unfolloｗのweb.phpのURLに変更-->
+                {!! form::submit('フォロー解除',['btn btn-primary'])!!}
+                {!! Form::close() !!}
+                @else
                 {!! Form::open(['url' => '/user/' . $user->id,'method' =>'post']) !!}
                 {!! form::submit('フォロー',['btn btn-primary'])!!}
                 {!! Form::close() !!}
-
-                {!! Form::open(['url' => '/user/unfollow/' . $user->id,'method' =>'post']) !!} <!--unfolloｗのweb.phpのURLに変更-->
-                {!! form::submit('フォロー解除',['btn btn-primary'])!!}
-              {!! Form::close() !!}
-            </li>
+              @endif
       @endforeach
     </ul>
 </div>

@@ -14,4 +14,12 @@ public function user(){
     protected $fillable =[
         'post','user_id'//カラム名
     ];
+
+    public function show(){
+  // Postモデル経由でpostsテーブルのレコードを取得
+  $posts = Post::get();
+  return view('yyyy', compact('posts'));
+}
+
+
 }

@@ -43,4 +43,35 @@ class PostsController extends Controller
         }
         return redirect('top');
     }
+
+   //投稿編集 10/28
+    // public function updateForm($id){
+        // $post = Post::where('id',$id)->first();
+    //     return redirect('/top',['post'=>$post]);
+    // }
+
+    //モーダル編集 10/28
+    public function update(Request $request, post $post){
+        $id = $request->input('id');//index44行目nameにpost追記
+        $up_post = $request->input('post');//index43行目nameにpost追記
+        //DD($up_post);
+        \DB::table('posts')
+        ->where('id',$id)
+        ->update(
+            ['post' => $up_post]
+        );
+        return redirect('top');
+    }
+
+    public function userPosts($id)
+    {
+        // ユーザーを取得
+        $user = User::findOrFail($id);
+
+        // ユーザーの投稿を取得
+        $posts = $user->posts()->orderBy('created_at', 'desc')->get();
+
+        // posts.indexというビューにデータを渡して表示
+        return view('posts.index', compact('user', 'posts'));
+    }
 }

@@ -22,15 +22,17 @@
 <body>
     <header>
         <div id = "head">
-        <h1><a href ='/top'><img src="images/atlas.png"></a></h1>
-            <div id="">
-                <div id="">
-                    <p>〇〇さん<img src="images/arrow.png"></p>
-                <div>
-                <ul>
-                    <li><a href="/top">ホーム</a></li>
-                    <li><a href="/profile">プロフィール</a></li>
-                    <li><a href="/logout">ログアウト</a></li>
+        <h1><a href ='/top'><img src="/images/atlas.png"></a></h1>
+        <!--アコーディオン記載場所-->
+            <div id="accordion" class="accordion_container">
+                <div class="accordion-title js-accordion-title">
+                    <p>{{ Auth::user()->username }}さん<img src="images/arrow.png"></p>
+                      <a href="#" class="menu-btn">ボタン</a>
+</div>
+                <ul class="menu"><!--アコーディオン設定箇所-->
+                    <li><a class='home' href="/top">ホーム</a></li>
+                    <li><a class='profile' href="/profile">プロフィール編集</a></li>
+                    <li><a class='logout' href="/logout">ログアウト</a></li>
                 </ul>
             </div>
         </div>
@@ -41,15 +43,15 @@
         </div >
         <div id="side-bar">
             <div id="confirm">
-                <p>〇〇さんの</p>
+                <p>{{ Auth::user()->username }}さんの</p>
                 <div>
                 <p>フォロー数</p>
-                <p>〇〇名</p>
+                <p>{{ Auth::user()->followingCount() }}</p>
                 </div>
                 <p class="btn"><a href="/follow-list">フォローリスト</a></p>
                 <div>
                 <p>フォロワー数</p>
-                <p>〇〇名</p>
+                <p>{{ Auth::user()->followersCount() }}</p>
                 </div>
                 <p class="btn"><a href="/follower-list">フォロワーリスト</a></p>
             </div>
@@ -58,7 +60,7 @@
     </div>
     <footer>
     </footer>
-    <script src="JavaScriptファイルのURL"></script>
-    <script src="JavaScriptファイルのURL"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>

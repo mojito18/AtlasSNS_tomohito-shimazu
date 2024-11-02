@@ -24,7 +24,7 @@
     <h1><img src="images/atlas.png"></h1>
     <p>Social Network Service</p>
   </header>
-  <div id="container">
+  <div id="container"><!--ログアウト-->
     @yield('content')
   </div>
   <script src="JavaScriptファイルのURL"></script>

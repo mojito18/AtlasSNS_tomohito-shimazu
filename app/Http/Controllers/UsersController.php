@@ -10,9 +10,46 @@ use App\User;
 class UsersController extends Controller
 {
     //
-    public function profile(){
-        return view('users.profile');
+    public function profile(User $user){
+        return view('users.profile', compact('user'));
     }
+
+    public function OtherUsers($id){
+        //dd($id);
+        $user = User::findOrFail($id);
+        // 認証済みユーザーのフォローしているユーザーを取得する
+        $followingUsers = auth()->user()->follows;
+        //ユーザー情報をビューに渡す
+
+
+        return view('users.profile(ex)',compact('user','followingUsers'));
+
+    }
+
+    public function update(Request $request, User $user){
+        //dd($request);
+         $request->validate([
+            'username'=>'required|min:2|max:12',//ブレードのネーム属性
+            'mail'=>'required|email|min:5|max:40',
+            'password'=>'required|min:8|max:20|confirmed',
+            'password_confirmation'=>'required|min:8|max:20',
+            'bio'=>'max:150',
+            'profile_image'=>'image|mimes:jpeg,png,bmp,gif,svg',
+         ]);
+
+    $images = $request->file('profile_image')->store('public/images');//画像登録（シンボリックリンク）
+        $id = Auth::user()->id;
+        User::where('id', $id)->update([
+            'username' => $request->input('username'),//テーブルに更新情報をインプット
+            'mail' => $request->input('mail'),
+            'password' => bcrypt($request->input('password')),
+            'bio' => $request->input('bio'),
+            'images' =>  basename($images),
+        ]);
+
+    return redirect()->route('topPage');//ルート名
+    }
+
     //検索機能実像
     public function search(request $request){
         $user=Auth::user(); //ログインをしているユーザー情報を取得
@@ -35,4 +72,5 @@ class UsersController extends Controller
 
         return view('users.search',['users'=>$users],['keyword'=>$keyword]);//bladeに定義をする①
     }
+
 }
