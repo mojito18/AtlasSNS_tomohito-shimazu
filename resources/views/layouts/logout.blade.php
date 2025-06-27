@@ -20,9 +20,9 @@
   <!--OGPタグ/twitterカード-->
 </head>
 <body>
-  <header>
+  <header class="header-login">
     <h1><img src="images/atlas.png"></h1>
-    <p>Social Network Service</p>
+    <p class="sub-text">Social Network Service</p>
   </header>
   <div id="container"><!--ログアウト-->
     @yield('content')

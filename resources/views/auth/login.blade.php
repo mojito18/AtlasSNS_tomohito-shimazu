@@ -4,7 +4,9 @@
 <!-- 適切なURLを入力してください -->
 
 {!! Form::open(['url' => '/login']) !!}
-<p>AtlasSNSへようこそ</p>
+
+
+<p class ="title-open">AtlasSNSへようこそ</p>
 
 <div class="form">
 
@@ -14,8 +16,9 @@
 <div class="form-password">{{ Form::password('password',['class' => 'input']) }}</div>
 
 </div>
-{{ Form::submit('ログイン') }}
-<div class=""><p class=""><a href="/register">新規ユーザーの方はこちら</a></p></div>
+
+<div class="login-button">{{ Form::submit('ログイン',['class' => 'button-submit']) }}</div>
+<p class="new-user"><a href="/register">新規ユーザーの方はこちら</a></p>
 
 {!! Form::close() !!}
 @endsection
