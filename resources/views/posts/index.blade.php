@@ -2,62 +2,91 @@
 
 @section('content')
 <!-- 適切なURLを入力してください -->
-{!! Form::open(['url' => '/post/create']) !!}
 
-<!-- CSRF保護 -->
+<div class="newOpen">
+  {!! Form::open(['url' => '/post/create']) !!}
+
+  <div class="text-form">
+    {!! Form::image('/images/icon1.png', 'submit', ['class' => 'user-image']) !!}
+    <!-- CSRF保護 -->
     {!! csrf_field() !!}
     <!-- 内容入力 -->
-    <div>
-        {!! Form::label('content', '内容:') !!}
-        {!! Form::textarea('content', null, ['required' => 'required']) !!}
+    <!--内容を薄く表示させる-->
+
+    <div class="content">
+      {!! Form::textarea(
+      'content',
+      null,
+      [
+      'required' => 'required',
+      'class' => 'post-class',
+      'placeholder' => '投稿内容を入力してください',
+      'class' => 'post-class post-text'
+      ]
+      ) !!}
     </div>
-    <!-- 送信ボタン -->
-    <div>
-        {!! Form::submit('投稿') !!}
+    <div class="sbt">
+      {!! Form::image('/images/post.png', 'submit', ['class' => 'submit-image']) !!}
     </div>
-    {!! Form::close() !!}
-
-    <h2>投稿一覧</h2>
-    @foreach($posts as $post)<!--モーダル削除，編集ボタン　10/24-->
-    <div class="post">
-    <p>{{ $post->post}}</p><!--投稿内容表示-->
-    <p>投稿者: {{ $post->user->username }}</p><!--投稿者の名前-->
-
-@if($post->user_id == Auth::id())
-<!--削除ボタン-->
-<a class="btn btn-danger" href="/post/{{$post->id}}/delete" onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')">削除</a>
-
-<!-- 投稿の編集ボタン -->
-  <div class="content">
-        <a class="js-modal-open" href="" post="{{ $post->post }}" post_id="{{ $post->id }}">編集</a><!--アップデートしたいpost_idとログインuserのidと実際に投稿したアップデートしたない-->
-    </div>
-@endif
-
+  </div>
+  {!! Form::close() !!}
 </div>
-    @endforeach
-     <!-- モーダルの中身 -->
-    <div class="modal js-modal">
-        <div class="modal__bg js-modal-close"></div>
-        <div class="modal__content">
-           <form action="/post/update" method="post">
-                <textarea name="post" class="modal_post"></textarea>
-                <input type="hidden" name="id" class="modal_id" value="">
-                <input type="submit" value="更新">
-                {{ csrf_field() }}
-           </form>
-           <a class="js-modal-close" href="">閉じる</a>
-        </div>
+@foreach($posts as $post)
+<!--モーダル削除，編集ボタン　10/24-->
+<!-- 投稿ユーザーアイコン -->
+<div class="userBox">
+  {!! Form::image('/images/icon2.png', 'submit', ['class' => 'postUser-image']) !!}
+
+  <div class="nextBox">
+    <!--投稿者の名前-->
+    <p class="postUser"> {{ $post->user->username }}</p>
+    <!--投稿内容表示-->
+    <p class="post">{!! nl2br(e($post->post)) !!}</p>
+  </div>
+
+  <div class="date-btn">
+    <!--投稿日時  -->
+    <p class="post-date">投稿日: {{ $post->created_at }}</p>
+
+
+    @if($post->user_id == Auth::id())
+    <div class="btn-box">
+
+      <!-- 投稿の編集ボタン -->
+
+      <img src="/images/edit.png" class="js-modal-open" data-post="{{ $post->post }}" data-post-id="{{ $post->id }}" style="cursor: pointer;">
+      <!--アップデートしたいpost_idとログインuserのidと実際に投稿したアップデートしたない-->
+      <!--削除ボタン-->
+      <img src="/images/trash-h.png" class="js-modal-open" data-post="{{ $post->post }}" data-post-id="{{ $post->id }}" style="cursor: pointer;">
+      <!-- デリートモーダル作成 -->
     </div>
+    @endif
+  </div>
+</div>
+@endforeach
+<!-- モーダルの中身 -->
+<div class="modal js-modal">
+  <div class="modal__bg js-modal-close"></div>
+  <div class="modal__content">
+    <form action="/post/update" method="post">
+      <textarea name="post" class="modal_post"></textarea>
+      <input type="hidden" name="id" class="modal_id" value="">
+      <input type="submit" value="更新">
+      {{ csrf_field() }}
+    </form>
+    <a class="js-modal-close" href="">閉じる</a>
+  </div>
+</div>
 
 @if(session('success'))
 <div class="alert alert-success">
-    {{ session('success') }}
+  {{ session('success') }}
 </div>
 @endif
 
 @if(session('error'))
 <div class="alert alert-danger">
-    {{ session('error')}}
+  {{ session('error')}}
 </div>
 @endif
 @endsection

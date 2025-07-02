@@ -1,21 +1,31 @@
 @extends('layouts.login')
 
 @section('content')
-{!! Form::open(['url'  => '/follower-List']) !!}
-    <h2>フォロ-リスト</h2>
-@foreach($followed_users as $user)
-    <div class="user">
-        <a href="{{ route('users.OtherUsers', $user) }}"><!--ここが元々ルーティングのusers.profileに飛ぶようになっていた-->
-        <img src="{{ asset('images/' . $user->images) }}" alt="{{ $user->username }}のアイコン" class="user-icon"></a>
-        <p>{{ $user->username }}</p>
-    </div>
+
+
+<div class="userList">
+  <h8 class="fList">フォロ-リスト</h8>
+  <div class="user-main">
+    @foreach($followed_users as $user)
+    <a href="{{ route('users.OtherUsers', $user) }}">
+      <!--ここが元々ルーティングのusers.profileに飛ぶようになっていた-->
+      <img src="{{ asset('images/' . $user->images) }}" alt="{{ $user->username }}のアイコン" class="user-icons">
+    </a>
+    <!-- <p>{{ $user->username }}</p> -->
     @endforeach
-
+  </div>
+</div>
 @foreach($posts as $post)
-<p>名前：{{ $post->user->username }}</p>
-<p>投稿内容：{{ $post->post }}</p>
-@endforeach
+<div class="pastPost">
+  <img src="{{ asset('images/' . $user->images) }}" alt="{{ $user->username }}のアイコン" class="user-icon">
+  <div class="post-main">
+    <p>{{ $post->user->username }}</p>
+    <p>{{ $post->post }}</p>
+  </div>
+  <p class="post-date">{{ $post->created_at }}</p>
 
+</div>
+@endforeach
 @endsection
 
 <!--フォローリスト-->

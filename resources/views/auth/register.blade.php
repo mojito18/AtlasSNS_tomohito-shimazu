@@ -4,27 +4,27 @@
 <!-- 適切なURLを入力してください -->
 {!! Form::open(['url' => '/register']) !!}
 
-<h2>新規ユーザー登録</h2>
+<h2 class="newUser">新規ユーザー登録</h2>
 
-<p>ユーザー名</p>
+<p class="newName">ユーザー名</p>
 {{ Form::label('ユーザー名') }}
-{{ Form::text('username',null,['class' => 'input']) }}
+<div class="inputName">{{ Form::text('username',null,['class' => 'input']) }}</div>
 
-<p>メールアドレス</p>
+<p class="newMail">メールアドレス</p>
 {{ Form::label('メールアドレス') }}
-{{ Form::text('mail',null,['class' => 'input']) }}
+<div class="inputMail">{{ Form::text('mail',null,['class' => 'input']) }}</div>
 
-<p>パスワード</p>
+<p class="newPassword">パスワード</p>
 {{ Form::label('パスワード') }}
-{{ Form::text('password',null,['class' => 'input']) }}
+<div class="inputPassword">{{ Form::text('password',null,['class' => 'input']) }}</div>
 
-<p>パスワード確認</p>
+<p class="newPassword_confirmation">パスワード確認</p>
 {{ Form::label('パスワード確認') }}
-{{ Form::text('password_confirmation',null,['class' => 'input']) }}
+<div class="inputPassword_confirmation">{{ Form::text('password_confirmation',null,['class' => 'input']) }}</div>
 
-{{ Form::submit('登録') }}
+<div class="newSubmit">{{ Form::submit('新規登録',['class' => 'new-submit']) }}</div>
 
-<p><a href="/login">ログイン画面へ戻る</a></p>
+<p class="backLogin"><a href="/login">ログイン画面へ戻る</a></p>
 
 {!! Form::close() !!}
 
