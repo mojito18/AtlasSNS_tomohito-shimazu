@@ -8,7 +8,7 @@
     {!! Form::open(['url' => '/post/update']) !!}
     <div class="">
       {!! Form::hidden('id',$post->id) !!}
-      {!! Form::input('text','update',$post->post['required' => 'required','class' => 'form-control']) !!}
+      {!! Form::input('text','update',$post->post,['required' => 'required','class' => 'form-control']) !!}
     </div>
     <button type="submit" class="">更新</button>
     {!! Form::close() !!}

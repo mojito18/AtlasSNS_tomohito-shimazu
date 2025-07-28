@@ -1,17 +1,17 @@
 @extends('layouts.login')
 
 @section('content')
-<div class="userList">
+<div class="userLists">
   <h8 class="fList">フォロワーリスト</h8>
 
   @foreach($followers as $user)
   <!--アイコンにプロフィールURLに移行-->
   <div class="">
     <a href="{{ route('users.OtherUsers', $user) }}">
-      <img src="{{ asset('images/' . $user->images) }}" alt="{{ $user->username }}のアイコン" class="user-icon"></a>
-    <p>{{ $user->username }}</p>
-    @endforeach
+      <img src="{{ asset('images/' . $user->images) }}" alt="{{ $user->username }}のアイコン" class="user-icons"></a>
+    <!-- <p>{{ $user->username }}</p> -->
   </div>
+  @endforeach
 </div>
 
 

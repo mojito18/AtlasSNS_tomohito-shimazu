@@ -109,8 +109,8 @@ header {
 }
 
 .post-date {
-    margin-bottom: 3%;
-    font-size: 10px;
+    margin-bottom: 2%;
+    font-size: 12px;
     text-align: end;
 }
 
@@ -264,6 +264,15 @@ header {
     padding: 1%;
 }
 
+/* フォロワー側 */
+.userLists {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 6px solid #ccc;
+}
+
+/* フォロー側 */
 .userList {
     display: flex;
     align-items: center;
@@ -292,8 +301,216 @@ header {
     display: flex;
 }
 
+/* フォローフォロワー共通 */
 .user-icons {
     margin-left: 10px;
 }
 
 /* 検索画面 */
+.text-search {
+    padding: 40px;
+    border-bottom: 6px solid #ccc;
+    display: flex;
+
+}
+
+.text-search form {
+    width: 50%;
+}
+
+.main-search {
+    display: flex;
+    align-items: center;
+}
+
+
+.searchSbt {
+    width: 12%;
+    border-radius: 10px;
+    margin-left: 3%;
+}
+
+.search-word {
+    padding: 17px;
+    width: 60%;
+    border-radius: 5px;
+}
+
+.search-keyword {
+    display: flex;
+    justify-content: center;
+}
+
+.keyword {
+    font-size: 20px;
+    color: #333;
+    padding: 15px 100px;
+    text-align: center;
+}
+
+/* ユーザー一覧 */
+.all-user {
+    margin: 20px;
+    max-width: 700px;
+    /* 中央寄せの幅 */
+}
+
+.user-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    margin-left: 30%;
+}
+
+.allUser-image {
+    width: 50px;
+    height: 50px;
+}
+
+.user-body {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 30%;
+}
+
+.user-action form {
+    margin: 0;
+}
+
+.unfollow-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 6px;
+    margin-left: 80%;
+
+}
+
+.follow-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 8px 33px;
+    border-radius: 6px;
+    margin-left: 80%;
+}
+
+/* フォローフォロワープロフィール画面 */
+
+.profile-user {
+    width: 50px;
+}
+
+.profile-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 10px 20px 9%;
+    border-bottom: 6px solid #ccc;
+}
+
+.byYourself {
+    width: 80%;
+}
+
+.byYourself p {
+    padding-top: 3%;
+}
+
+.unfollow-btns {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 6px;
+}
+
+.follow-btns {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 6px;
+}
+
+.profile-block {
+    padding: 10px 10px 10px 10%;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    border-bottom: 1px solid;
+
+}
+
+.profile-line {
+    margin-left: 20px;
+    /* ←左にずらす */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+/*プロフィール画面*/
+/*
+        <div class="profile-image-section"><img class="profile-image" src="{{ asset('/storage/images/' . Auth::user()->images) }}"></div>
+*/
+/*全体*/
+
+.profile-table {
+    position: relative;
+}
+
+.profile-table th {
+    text-align: left;
+    width: 150px;
+    padding: 10px;
+    vertical-align: middle;
+    font-size: 20px;
+}
+
+.profile-table td {
+    padding: 10px;
+    vertical-align: middle;
+}
+
+.profile-table input[type="text"],
+.profile-table input[type="password"] {
+    width: 250px;
+    /* 入力欄の幅を統一 */
+    padding: 14px;
+    border: 1px solid #ccc;
+    margin: 10px 60%;
+    background-color: #d3d3d3;
+}
+
+.profile-table input[type="file"] {
+    width: 250px;
+    /* 入力欄の幅を統一 */
+    padding: 40px 14px;
+    border: 1px solid #ccc;
+    margin: 10px 60%;
+    background-color: #d3d3d3;
+
+}
+
+.profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    top: 40px;
+    left: -70px;
+}
+
+.form-submit {
+    background-color: #F25757;
+    padding: 5px 50px;
+    font-size: 16px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}

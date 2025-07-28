@@ -24,11 +24,12 @@
 <body>
   <header>
     <div id="head">
-      <h1><a href='/top'><img src="/images/atlas.png"></a></h1>
+      <h1><a href='/top'><img src="/images/atlas.png" alt="プロフィール画像"></a></h1>
       <!--アコーディオン記載場所-->
-      <div id="accordion" class="accordion_container">
+      <div id=" accordion" class="accordion_container">
         <div class="accordion-title js-accordion-title">
-          <p>{{ Auth::user()->username }}さん<img src="images/arrow.png"></p>
+          <!--更新の画像-->
+          <p>{{ Auth::user()->username }}さん<img src="{{asset('/storage/images/'.Auth::user()->images)}}" alt="プロフィール画像"></p>
           <a href="#" class="menu-btn">ボタン</a>
         </div>
         <ul class="menu">

@@ -18,6 +18,8 @@
 
 //Auth::routes();
 
+use Illuminate\Support\Facades\Route;
+
 
 //ログアウト中のページ
 Route::get('/login', 'Auth\LoginController@login');
@@ -32,44 +34,45 @@ Route::get('/added', 'Auth\RegisterController@added');
 Route::post('/added', 'Auth\RegisterController@added');
 
 //ミドルウェア
-Route::group(['Middleware'=>'Auth'],function(){
+Route::group(['Middleware' => 'Auth'], function () {
 
   //ログイン中のページ
-Route::get('/top','PostsController@index')->name('topPage');
-//ログアウトルーティング
-Route::get('/logout','Auth\LoginController@logout')->name('logout');
+  Route::get('/top', 'PostsController@index')->name('topPage');
+  //ログアウトルーティング
+  Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::get('/profile','UsersController@profile');
+  Route::get('/profile', 'UsersController@profile');
 
-//検索機能
-Route::get('/search','UsersController@search');//indexをsearchに変更
-Route::post('/search','UsersController@search');//
+  //検索機能
+  Route::get('/search', 'UsersController@search'); //indexをsearchに変更
+  Route::post('/search', 'UsersController@search'); //
 
-//フォローリスト表示
-Route::get('/follow-list','followsController@followList')->name('follow-listPage');
-//フォロワーリスト表示
-Route::get('/follower-list','followsController@followerList')->name('follower-listPage');
+  //フォローリスト表示
+  Route::get('/follow-list', 'followsController@followList')->name('follow-listPage');
+  //フォロワーリスト表示
+  Route::get('/follower-list', 'followsController@followerList')->name('follower-listPage');
 
-//投稿フォーム
-Route::get('/post','PostsController@index');
-Route::post('/post/create','PostsController@create');
-//投稿編集アップロード
-//Route::get('/post/{id}/updateForm','PostsController@updateForm');
-//投稿編集完了　10/29
-Route::post('/post/update','PostsController@update');
+  //投稿フォーム
+  Route::get('/post', 'PostsController@index');
+  Route::post('/post/create', 'PostsController@create');
+  //投稿編集アップロード
+  //Route::get('/post/{id}/updateForm','PostsController@updateForm');
+  //投稿編集完了　10/29
+  Route::post('/topPage', 'PostsController@update');
 
-//9/20 ユーザー投稿一覧
-//Route::get('/user/{id}/posts', 'PostController@userPosts');
-Route::get('/users/{user}', 'UsersController@profile')->name('users.profile');
-//プロフィール編集 9/26更新
-Route::put('/profile/update','UsersController@update');
-//フォロワーリストから他のユーザー画面表示
-Route::get('users/{user}/profile', 'UsersController@OtherUsers')->name('users.OtherUsers');
+  //9/20 ユーザー投稿一覧
+  //Route::get('/user/{id}/posts', 'PostController@userPosts');
+  Route::get('/users/{user}', 'UsersController@profile')->name('users.profile');
+  //プロフィール編集 9/26更新
+  Route::post('/profile/update', 'UsersController@update');
+
+  //フォロワーリストから他のユーザー画面表示
+  Route::get('users/{user}/profile', 'UsersController@OtherUsers')->name('users.OtherUsers');
 
 
-//フォロー機能
-Route::post('/user/{id}','FollowsController@follow');
-Route::post('/user/unfollow/{id}','FollowsController@unfollow');//getからpostに変更．．/user/{id}/unfollow/→/user/unfollow/{id}
+  //フォロー機能
+  Route::post('/user/{id}', 'FollowsController@follow');
+  Route::post('/user/unfollow/{id}', 'FollowsController@unfollow'); //getからpostに変更．．/user/{id}/unfollow/→/user/unfollow/{id}
 });
- //削除機能
-Route::get('/post/{id}/delete','PostsController@destroy');
+//削除機能
+Route::get('/post/{id}/delete', 'PostsController@destroy');

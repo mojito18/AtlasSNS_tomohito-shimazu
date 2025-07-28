@@ -46,7 +46,7 @@
 
   <div class="date-btn">
     <!--投稿日時  -->
-    <p class="post-date">投稿日: {{ $post->created_at }}</p>
+    <p class="post-date">投稿日: {{ $post->created_at ->format('Y-m-d H:i')}}</p>
 
 
     @if($post->user_id == Auth::id())
@@ -58,6 +58,20 @@
       <!--アップデートしたいpost_idとログインuserのidと実際に投稿したアップデートしたない-->
       <!--削除ボタン-->
       <img src="/images/trash-h.png" class="js-modal-open" data-post="{{ $post->post }}" data-post-id="{{ $post->id }}" style="cursor: pointer;">
+
+
+      <!-- {!! Form::image('/images/edit.png', 'edit', [
+      'class' => 'js-modal-open',
+      'post' => $post->post,
+      'post_id' => $post->id
+      ])!!
+      }
+
+
+      { !!Form:: open(['url' => '/post/'.$post -> id, 'method' => 'DELETE', 'onsubmit' => "return confirm('こちらの投稿を削除してもよろしいでしょうか？')"])!! }
+      { !!Form:: image('/images/trash-h.png', 'delete', ['class' => 'delete-button'])!! }
+      { !!Form:: close()!! } -->
+
       <!-- デリートモーダル作成 -->
     </div>
     @endif
