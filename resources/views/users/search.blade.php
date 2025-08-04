@@ -6,7 +6,7 @@
   {!! Form::open(['url' =>'/search','method' => 'post']) !!}
   <div class="main-search">
     <!-- {!! Form::label('word','検索ワード') !!} -->
-    {!! Form::text('word', null, ['required' => 'required', 'class' => 'search-word']) !!}
+    {!! Form::text('word', null, ['required' => 'required', 'class' => 'search-word', 'placeholder'=>"ユーザー名"]) !!}
     <input type="image" src="/images/search.png" name="search" class="searchSbt">
   </div>
   {!! Form::close() !!}

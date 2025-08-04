@@ -24,22 +24,27 @@
 <body>
   <header>
     <div id="head">
-      <h1><a href='/top'><img src="/images/atlas.png" alt="プロフィール画像"></a></h1>
+      <h1><a href='/top'><img src="/images/atlas.png" class="headImg" alt="プロフィール画像"></a></h1>
       <!--アコーディオン記載場所-->
-      <div id=" accordion" class="accordion_container">
+      <div id="accordion" class="accordion_container">
         <div class="accordion-title js-accordion-title">
-          <!--更新の画像-->
-          <p>{{ Auth::user()->username }}さん<img src="{{asset('/storage/images/'.Auth::user()->images)}}" alt="プロフィール画像"></p>
-          <a href="#" class="menu-btn">ボタン</a>
+          <p>
+            {{ Auth::user()->username }}さん <span id="toggleArrow" class="arrow-icon">
+              <svg id="arrowSvg" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">
+                <path d="M6 9l6 6 6-6" fill="none" stroke="#333" stroke-width="2" />
+              </svg>
+            </span>
+            <img src="{{asset('/storage/images/'.Auth::user()->images)}}" alt="プロフィール画像" width="30" height="30">
+          </p>
         </div>
-        <ul class="menu">
-          <!--アコーディオン設定箇所-->
-          <li><a class='home' href="/top">ホーム</a></li>
-          <li><a class='profile' href="/profile">プロフィール編集</a></li>
-          <li><a class='logout' href="/logout">ログアウト</a></li>
+        <ul class="menu js-accordion-content">
+          <li><a class='accordion-text' href="/top">HOME</a></li>
+          <li class="highlight-menu-item"><a class='accordion-text' href="/profile">プロフィール編集</a></li>
+          <li><a class='accordion-text' href="/logout">ログアウト</a></li>
         </ul>
       </div>
     </div>
+
   </header>
   <div id="row">
     <div id="container">
