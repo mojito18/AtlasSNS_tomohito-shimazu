@@ -19,8 +19,8 @@
 <div class="pastPost">
   <img src="{{asset('/storage/images/'.Auth::user()->images)}}" alt=" {{ $user->username }}のアイコン" class="user-icon">
   <div class="post-main">
-    <p>{{ $post->user->username }}</p>
-    <p>{{ $post->post }}</p>
+    <p style="margin: 10px 0%;">{{ $post->user->username }}</p>
+    <p style="margin: 10px 0%;">{{ $post->post }}</p>
   </div>
   <p class="post-date">{{ $post->created_at }}</p>
 
