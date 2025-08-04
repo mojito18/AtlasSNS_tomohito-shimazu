@@ -91,7 +91,7 @@ h1 {
     /* 幅を小さくして要素を真ん中に持ってくる */
     width: 200px;
     margin: 0 auto;
-    padding: 130px 0 0 0;
+    padding: 50px 0 0 0;
 }
 
 h1 img {
@@ -101,11 +101,12 @@ h1 img {
 .sub-text {
 
     color: #fff;
-    font-size: 25px;
+    font-size: 32px;
     font-weight: bold;
     /* ブロック要素で中央揃えをする方法 */
     text-align: center;
-    padding-bottom: 20px;
+    padding-bottom: 35px;
+    width: 98%;
 
 }
 
@@ -192,4 +193,14 @@ h1 img {
     font-size: 16px;
     margin: auto;
     padding: 10px;
+}
+
+/*バリデーションエラー*/
+.alert-danger {
+    color: #dc3545;
+    /* 赤色の文字 */
+    font-size: 0.875em;
+    /* 少し小さめのフォントサイズ */
+    margin-top: 5px;
+    /* 上部の余白 */
 }

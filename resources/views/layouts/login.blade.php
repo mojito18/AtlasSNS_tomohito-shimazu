@@ -60,7 +60,7 @@
           </div>
           <p class="followBtn"><a href="/follow-list">フォローリスト</a></p>
           <div class="follower">
-            <p>フォロワー数</p>
+            <p style="letter-spacing: -2px;">フォロワー数</p>
             <p>{{ Auth::user()->followersCount() }}人</p>
           </div>
           <p class="followerBtn"><a href="/follower-list">フォロワーリスト</a></p>
@@ -75,7 +75,7 @@
   <footer>
   </footer>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="js/script.js"></script>
+  <script src="/js/script.js"></script>
 </body>
 
 </html>
