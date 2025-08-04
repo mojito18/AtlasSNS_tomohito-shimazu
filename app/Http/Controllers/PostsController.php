@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
-use BD;
-use Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\User;
 
 class PostsController extends Controller
 {
@@ -30,40 +31,58 @@ class PostsController extends Controller
     //トップ画面表示
     public function index()
     {
-        //ログイン認証しているユーザーデータ取得
-        $posts = post::get(); //postテーブルから投稿（post）を取得
+        $followIds = Auth::user()->follows()->pluck('followed_id'); //followed_idでフォロー管理
 
-        return view('posts.index', ['posts' => $posts]);
-        post::orderBy('created_at', 'desc')->get(); //新しい順に表示
+        $posts = Post::whereIn('user_id', $followIds) //投稿取得
+            ->orWhere('user_id', Auth::id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('posts.index', compact('posts'));
     }
+
+
+    public function edit($id)
+    {
+        $post = Post::findOrFail($id);
+        return view('posts.edit', compact('post'));
+    }
+
+    //投稿編集 10/28
+    public function updateForm(Request $request)
+    {
+
+
+        $post = Post::findOrFail($request->id);  // hidden から受け取った id
+
+        $post->post = $request->post;
+        $post->save();
+        return redirect('/top');
+    }
+
+
     public function destroy($id)
     {
         $post = post::find($id); //一つのメソットごとに定義をしないと未定義になる
         //自分の投稿のみ削除にする
+        // dd($post);
         if ($post && $post->user_id == Auth::id()) {
             $post->delete();
         }
         return redirect('top');
     }
-
-    //投稿編集 10/28
-    // public function updateForm($id){
-    // $post = Post::where('id',$id)->first();
-    //     return redirect('/top',['post'=>$post]);
-    // }
-
     //モーダル編集 10/28
     public function update(Request $request, post $post)
     {
         $id = $request->input('id'); //index44行目nameにpost追記
         $up_post = $request->input('post'); //index43行目nameにpost追記
         //DD($up_post);
-        \DB::table('posts')
+        DB::table('posts')
             ->where('id', $id)
             ->update(
                 ['post' => $up_post]
             );
-        return redirect('top');
+        return view('top');
     }
 
     public function userPosts($id)

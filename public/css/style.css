@@ -10,16 +10,169 @@ header {
 }
 
 /*アコーディオンメニュー*/
-
-#accordion {
-    float: right;
+/* 親要素のコンテナ (もし存在すれば) - 例としてヘッダーの一部と仮定 */
+.header-right-section {
+    display: flex;
+    justify-content: flex-end;
+    /* コンテナ内で右寄せにする場合 */
+    align-items: center;
+    padding-right: 20px;
+    /* 右端からの余白 */
+    height: 60px;
+    /* ヘッダーの高さに合わせて調整 */
+    background-color: #4B0082;
+    /* 紫色系の背景色（例） */
 }
 
-.accordion-title.menu {
 
-    margin: auto;
-    display: none;
+/* 全体を囲むアコーディオンコンテナ */
+.accordion_container {
+    position: relative;
+    /* 子要素（.menu）の absolute 配置の基準 */
+    /* これをページや親要素のどこに配置するかによって、
+       margin や float、flexbox などで調整してください。
+       ゴール画像では、右上に配置されています。
+       もしヘッダー右端に表示したいなら、上記 .header-right-section のような親要素と組み合わせてください。 */
+    margin-right: 20px;
+    /* 例: 右端から少し離す */
 }
+
+/* アコーディオンタイトル（「admin さん」と矢印と画像の部分） */
+.accordion-title {
+    display: flex;
+    /* pタグとspanを横並びにする */
+    align-items: center;
+    /* 垂直中央揃え */
+    cursor: pointer;
+    /* クリック可能であることを示す */
+    padding: 5px 10px;
+    /* パディングでクリック可能な範囲を広げる */
+    /* background-color: #007bff; /* もしタイトルに背景色を付けるなら */
+    /* color: #fff; */
+    /* もしタイトル文字色を白にするなら */
+    border-radius: 5px;
+    /* 角を少し丸める */
+}
+
+.accordion-title p {
+    margin: 0;
+    /* pタグのデフォルトマージンをリセット */
+    display: flex;
+    /* pタグ内の要素を横並びにする */
+    align-items: center;
+    /* 垂直方向中央揃え */
+}
+
+/* ユーザー名のテキスト部分（直接 p の子として扱うか、spanで囲む） */
+.accordion-title p {
+    color: #fff;
+    /* 「admin さん」の文字色を白に */
+    font-size: 1.1em;
+    /* 文字サイズ調整 */
+    font-weight: bold;
+}
+
+.accordion-title p span.arrow-icon {
+    margin: 0 5px;
+    /* テキストと矢印の間隔 */
+    order: 2;
+    /* 矢印をテキストの次に配置 */
+}
+
+.accordion-title p img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    /* 丸い画像 */
+    margin-left: 5px;
+    /* 矢印と画像の間隔 */
+    order: 3;
+    /* 画像を最後に配置 */
+}
+
+/*ヘッダーアイコンサイズ*/
+.headImg {
+    width: 100px;
+    padding: 10px;
+}
+
+
+/*バリデーションエラー*/
+
+.alert-danger {
+    color: #dc3545;
+    /* 赤色の文字 */
+    font-size: 0.875em;
+    /* 少し小さめのフォントサイズ */
+    margin-top: 5px;
+    /* 上部の余白 */
+}
+
+/* ハンバーガーメニュー自体のスタイル */
+.menu {
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    /* 背景色を白に */
+    top: 100%;
+    /* ******** 最重要！アコーディオンタイトルの真下に配置 ******** */
+    right: -39px;
+    /* ******** 最重要！親要素（.accordion_container）の右端に揃える ******** */
+    left: auto;
+    /* rightを優先させるため left をautoに */
+    transform: none;
+    /* translateX(-50%) は不要 */
+    width: 284px;
+    /* メニュー全体の幅を画像に合わせて調整 */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #ccc;
+    /* 全体を囲む線 */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    /* 影 */
+    overflow: hidden;
+    z-index: 1000;
+
+    /* ******** 最重要！初期状態でメニューを非表示にする ******** */
+    /* display: none; */
+}
+
+/* 各メニュー項目のスタイル */
+.menu li {
+    padding: 0;
+}
+
+.menu a {
+    display: block;
+    /* 各項目を縦に並べる */
+    padding: 24px 20px;
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    /* 文字色 */
+    font-weight: bold;
+    border-bottom: 1px solid #eee;
+    /* 各項目の下線 */
+    transition: background-color 0.3s ease;
+}
+
+.menu li:last-child a {
+    border-bottom: none;
+}
+
+/* ホバー時のスタイル */
+.menu a:hover {
+    background-color: #0056b3;
+}
+
+/* 矢印SVGのstrokeをCSSで制御するため、HTMLからstroke属性を削除するのがベストプラクティスです。 */
+#arrowSvg.up {
+    transform: rotate(180deg);
+    /* 上向きに回転 */
+    transition: transform 0.3s;
+}
+
 
 
 /* main content */
@@ -83,11 +236,12 @@ header {
 }
 
 .user-image {
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     margin-right: 20px;
     display: flex;
+    padding: 10px;
 }
 
 /* 投稿画面 */
@@ -95,7 +249,6 @@ header {
 .userBox {
     border-bottom: 1px solid;
     padding: 10px;
-    align-items: center;
     justify-content: space-between;
     display: flex;
 }
@@ -114,6 +267,12 @@ header {
     text-align: end;
 }
 
+.date-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .btn-box {
     display: flex;
     justify-content: end;
@@ -121,22 +280,46 @@ header {
 }
 
 .postUser {
-    margin-bottom: 5%;
+    margin: 2% 0;
     padding: 2px 0;
 }
 
 .postUser-image {
     margin-left: 15%;
     height: 45px;
+    padding-top: 10px;
 }
 
 .js-modal-open {
     width: 11%;
+    padding: 10px 10px;
+    object-fit: contain;
 }
 
-.delete-button {
-    width: 14%;
+.js-delete-modal-open {
+    width: 11%;
     text-align: right;
+    padding: 10px 10px;
+    border-radius: 15px;
+    object-fit: contain;
+}
+
+.delete-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    /* 画像を枠内に収める */
+}
+
+/* 通常時（青など） */
+.delete-icon {
+    transition: filter 0.3s ease;
+    /* アニメーションで滑らかに */
+}
+
+/* ホバー時に色を反転 */
+.delete-icon:hover {
+    filter: brightness(0) invert(1);
 }
 
 /* サイドバー */
@@ -231,7 +414,6 @@ header {
     height: 100vh;
     position: absolute;
     width: 100%;
-    border-radius: 50px;
 }
 
 .modal__content {
@@ -242,6 +424,15 @@ header {
     top: 50%;
     transform: translate(-50%, -50%);
     width: 70%;
+}
+
+.modal_delete_content {
+    background: #fff;
+    left: 35%;
+    padding: 40px 0px 20px 20px;
+    position: absolute;
+    border: 1px solid gray;
+    width: 35%;
 }
 
 .modal_post {
@@ -255,6 +446,26 @@ header {
     border: 1px solid #ccc;
 }
 
+.box-button {
+    margin-left: 60%;
+    margin: 10px 0px 0px 50%;
+}
+
+.btn-ok {
+    padding: 3% 17%;
+    background: cornflowerblue;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+}
+
+.btn-cancel {
+    padding: 2% 8%;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    margin: 10px 0;
+}
 
 /* フォローリスト，フォロワーリスト */
 
@@ -262,6 +473,7 @@ header {
     margin-bottom: 5%;
     font-size: 25px;
     padding: 1%;
+    margin: 10px 0;
 }
 
 /* フォロワー側 */
@@ -364,8 +576,8 @@ header {
 }
 
 .allUser-image {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
 }
 
 .user-body {
@@ -413,11 +625,19 @@ header {
 }
 
 .byYourself {
-    width: 80%;
+    margin-right: 50%;
+    font-size: 20px;
 }
 
-.byYourself p {
-    padding-top: 3%;
+
+.byYourself table {
+    border-collapse: collapse;
+}
+
+.byYourself th,
+.byYourself td {
+    padding: 8px 15px;
+    text-align: left;
 }
 
 .unfollow-btns {
@@ -451,6 +671,11 @@ header {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+}
+
+.profile-name,
+.profile-post {
+    margin: 10px;
 }
 
 /*プロフィール画面*/

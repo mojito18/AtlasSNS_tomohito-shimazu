@@ -6,12 +6,18 @@
   <img src="{{ asset('images/' . $user->images) }}" class="profile-user">
 
   <div class="byYourself">
-    <h2>ユーザー名</h2>
-    {{ $user->username }}
-
-    <p>自己紹介 {{ $user->bio }}</p>
-    {{ $user->bio }}
+    <table>
+      <tr>
+        <th>ユーザー名</th>
+        <td>{{ $user->username }}</td>
+      </tr>
+      <tr>
+        <th>自己紹介</th>
+        <td>{{ $user->bio }}</td>
+      </tr>
+    </table>
   </div>
+
   <!--ログインしているユーザーがユーザーを（$user）フォローしていない場合-->
   @if(Auth::user()->isFollowing($user->id))
   <!-- userテーブルからidを取り出す（カラム） -->

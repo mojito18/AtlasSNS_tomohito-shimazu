@@ -54,41 +54,45 @@
 
       <!-- 投稿の編集ボタン -->
 
-      <img src="/images/edit.png" class="js-modal-open" data-post="{{ $post->post }}" data-post-id="{{ $post->id }}" style="cursor: pointer;">
+      <img src="/images/edit.png" class="delete-icon js-modal-open" data-post="{{ $post->post }}" data-post-id="{{ $post->id }}" style="cursor: pointer;">
       <!--アップデートしたいpost_idとログインuserのidと実際に投稿したアップデートしたない-->
       <!--削除ボタン-->
-      <img src="/images/trash-h.png" class="js-modal-open" data-post="{{ $post->post }}" data-post-id="{{ $post->id }}" style="cursor: pointer;">
-
-
-      <!-- {!! Form::image('/images/edit.png', 'edit', [
-      'class' => 'js-modal-open',
-      'post' => $post->post,
-      'post_id' => $post->id
-      ])!!
-      }
-
-
-      { !!Form:: open(['url' => '/post/'.$post -> id, 'method' => 'DELETE', 'onsubmit' => "return confirm('こちらの投稿を削除してもよろしいでしょうか？')"])!! }
-      { !!Form:: image('/images/trash-h.png', 'delete', ['class' => 'delete-button'])!! }
-      { !!Form:: close()!! } -->
-
-      <!-- デリートモーダル作成 -->
+      <img src="/images/trash-h.png" class="delete-icon js-delete-modal-open" data-post-id="{{ $post->id }}" style="cursor: pointer;">
     </div>
     @endif
   </div>
 </div>
 @endforeach
-<!-- モーダルの中身 -->
+<!--モーダル記述はendforeachの外に出す-->
+<!-- 編集モーダルの中身 -->
 <div class="modal js-modal">
   <div class="modal__bg js-modal-close"></div>
   <div class="modal__content">
-    <form action="/post/update" method="post">
+    <form action="{{ route('post.update') }}" method="POST">
+      @csrf
       <textarea name="post" class="modal_post"></textarea>
-      <input type="hidden" name="id" class="modal_id" value="">
+      <input type="hidden" name="id" class="modal_id">
       <input type="submit" value="更新">
-      {{ csrf_field() }}
     </form>
     <a class="js-modal-close" href="">閉じる</a>
+  </div>
+</div>
+
+
+<!-- デリートモーダル作成 -->
+
+<div class="modal js-delete-modal">
+  <div class="js-delete-modal-close"></div>
+  <div class="modal_delete_content">
+    <p>こちらの投稿を削除してもよろしいでしょうか？</p>
+    <form id="deleteForm" method="post">
+      @csrf
+      @method('DELETE')
+      <div class="box-button">
+        <button type="submit" class="btn-ok">OK</button>
+        <button type="button" class="btn-cancel js-delete-modal-close">キャンセル</button>
+      </div>
+    </form>
   </div>
 </div>
 

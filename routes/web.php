@@ -55,8 +55,11 @@ Route::group(['Middleware' => 'Auth'], function () {
   //投稿フォーム
   Route::get('/post', 'PostsController@index');
   Route::post('/post/create', 'PostsController@create');
+  // 編集フォーム表示用（モーダルに使う）
+  // Route::get('/post/edit', 'PostsController@edit')->name('post.edit');
+
   //投稿編集アップロード
-  //Route::get('/post/{id}/updateForm','PostsController@updateForm');
+  Route::post('/post/updateForm', 'PostsController@updateForm')->name('post.update');
   //投稿編集完了　10/29
   Route::post('/topPage', 'PostsController@update');
 
@@ -73,6 +76,7 @@ Route::group(['Middleware' => 'Auth'], function () {
   //フォロー機能
   Route::post('/user/{id}', 'FollowsController@follow');
   Route::post('/user/unfollow/{id}', 'FollowsController@unfollow'); //getからpostに変更．．/user/{id}/unfollow/→/user/unfollow/{id}
+
+  //投稿削除機能
+  Route::delete('/post/{id}', 'PostsController@destroy')->name('post.delete');
 });
-//削除機能
-Route::get('/post/{id}/delete', 'PostsController@destroy');
