@@ -17,32 +17,56 @@
         </td>
       </tr>
       <th align="left"><label for="username">ユーザー名</label></th>
-      <td><input type="text" name="username" value="{{ Auth::user()->username }}"></td>
+      <td><input type="text" name="username" value="{{ Auth::user()->username }}">
+        @error('username')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+      </td>
       </tr>
 
       <tr>
         <th align="left"><label for="mail">メールアドレス</label></th>
-        <td><input type="text" name="mail" value="{{ Auth::user()->mail }}"></td>
+        <td><input type="text" name="mail" value="{{ Auth::user()->mail }}">
+          @error('mail')
+          <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
+        </td>
       </tr>
 
       <tr>
         <th align="left"><label for="password">パスワード</label></th>
-        <td><input type="password" name="password"></td>
+        <td><input type="password" name="password">
+          @error('password')
+          <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
+        </td>
       </tr>
 
       <tr>
         <th align="left"><label for="password_confirmation">パスワード確認</label></th>
-        <td><input type="password" name="password_confirmation"></td>
+        <td><input type="password" name="password_confirmation">
+          @error('password_confirmation')
+          <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
+        </td>
       </tr>
 
       <tr>
         <th align="left"><label for="bio">自己紹介</label></th>
-        <td><input type="text" name="bio" value="{{ Auth::user()->bio }}"></td>
+        <td><input type="text" name="bio" value="{{ Auth::user()->bio }}">
+          @error('bio')
+          <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
+        </td>
       </tr>
 
       <tr>
         <th align="left"><label for="profile_image">アイコン画像</label></th>
-        <td><input type="file" name="profile_image"></td>
+        <td><input type="file" name="profile_image">
+          @error('profile_image')
+          <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
+        </td>
       </tr>
     </table>
 

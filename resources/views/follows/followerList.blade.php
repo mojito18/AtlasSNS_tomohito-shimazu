@@ -8,7 +8,7 @@
   <!--アイコンにプロフィールURLに移行-->
   <div class="">
     <a href="{{ route('users.OtherUsers', $user) }}">
-      <img src="{{ asset('images/' . $user->images) }}" alt="{{ $user->username }}のアイコン" class="user-icons"></a>
+      <img src="{{asset('/storage/images/'.Auth::user()->images)}}" alt="{{ $user->username }}のアイコン" class="user-icons"></a>
     <!-- <p>{{ $user->username }}</p> -->
   </div>
   @endforeach

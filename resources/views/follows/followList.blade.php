@@ -9,7 +9,7 @@
     @foreach($followed_users as $user)
     <a href="{{ route('users.OtherUsers', $user) }}">
       <!--ここが元々ルーティングのusers.profileに飛ぶようになっていた-->
-      <img src="{{ asset('images/' . $user->images) }}" alt="{{ $user->username }}のアイコン" class="user-icons">
+      <img src="{{asset('/storage/images/'.Auth::user()->images)}}" alt="{{ $user->username }}のアイコン" class="user-icons">
     </a>
     <!-- <p>{{ $user->username }}</p> -->
     @endforeach
@@ -17,7 +17,7 @@
 </div>
 @foreach($posts as $post)
 <div class="pastPost">
-  <img src="{{ asset('images/' . $user->images) }}" alt="{{ $user->username }}のアイコン" class="user-icon">
+  <img src="{{asset('/storage/images/'.Auth::user()->images)}}" alt=" {{ $user->username }}のアイコン" class="user-icon">
   <div class="post-main">
     <p>{{ $post->user->username }}</p>
     <p>{{ $post->post }}</p>
