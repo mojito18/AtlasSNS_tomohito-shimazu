@@ -29,18 +29,14 @@ class UsersController extends Controller
 
     public function update(Request $request, User $user)
     {
-        //dd($request);
-        $request->validate([
+        $rules = [
             'username' => 'required|min:2|max:12', //ブレードのネーム属性
             'mail' => 'required|email|min:5|max:40',
+            'password' => 'required|string|min:8|max:20| confirmed ', // パスワードは常に必須
+            'password_confirmation' => 'required_with:password|string|min:8|max:20',
             'bio' => 'max:150',
             'profile_image' => 'image|mimes:jpeg,png,bmp,gif,svg',
-        ]);
-
-        // パスワードが入力されている場合のみ、パスワード関連のバリデーションルールを追加
-        if ($request->filled('password')) {
-            $rules['password'] = 'min:8|max:20|confirmed';
-        }
+        ];
 
         //バリデーション時のエラー
         $messages = [
@@ -48,11 +44,17 @@ class UsersController extends Controller
             'mail.required' => 'メールアドレスは必ず入力してください。',
             'password.required' => 'パスワードは必ず入力してください。', // パスワードが入力された場合のみ適用されるが、メッセージは必要
             'password.confirmed' => 'パスワードが確認用と一致しません。', // confirmedルールは自動的にpassword_confirmationをチェック
+            'password.min' => 'パスワードは8文字以上で入力してください。',
+            'password.max' => 'パスワードは20文字以内で入力してください。',
+            'password_confirmation.min' => 'パスワード確認は8文字以上で入力してください。',
+            'password_confirmation.max' => 'パスワード確認は20文字以内で入力してください。',
 
             'bio.max' => '自己紹介は150文字以内で入力してください。',
 
             'profile_image.image' => 'プロフィール画像は画像ファイルである必要があります。',
         ];
+
+        $request->validate($rules, $messages);
 
 
 

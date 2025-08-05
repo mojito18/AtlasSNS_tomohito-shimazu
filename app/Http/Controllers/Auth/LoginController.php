@@ -49,8 +49,11 @@ class LoginController extends Controller
                 'password' => 'required|alpha_num|min:8|max:20', // パスワードは必須、英数字、8文字以上20文字以内
             ], [ // ここにカスタムメッセージの配列を追加
                 'mail.required' => 'メールアドレスは必ず入力してください。',
+                'mail.email' => '有効なメールアドレス形式で入力してください。',
                 'password.required' => 'パスワードは必ず入力してください。',
                 'password.alpha_num' => 'パスワードは英数字で入力してください',
+                'password.min' => 'パスワードは8文字以上入力してください',
+                'password.max' => 'パスワードは20文字以下入力してください',
             ]);
 
 

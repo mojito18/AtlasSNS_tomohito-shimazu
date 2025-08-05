@@ -13,10 +13,14 @@
       <tr>
         <!-- アイコンセル -->
         <td style="width:70px; text-align:center; vertical-align: middle;">
+          @if (Auth::user()->images && Auth::user()->images !== 'icon1.png')
           <img class="profile-image" src="{{ asset('/storage/images/' . Auth::user()->images) }}" alt="プロフィール画像" style="width:50px; height:50px; border-radius:50%; object-fit:cover;">
+          @else
+          <img src="{{ asset('/images/icon1.png') }}" alt="デフォルトアイコン" class="profile-image">
+          @endif
         </td>
       </tr>
-      <th align="left"><label for="username">ユーザー名</label></th>
+      <th align=" left"><label for="username">ユーザー名</label></th>
       <td><input type="text" name="username" value="{{ Auth::user()->username }}">
         @error('username')
         <div class="alert alert-danger">{{ $message }}</div>
