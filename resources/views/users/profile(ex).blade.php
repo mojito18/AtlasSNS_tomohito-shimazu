@@ -5,7 +5,11 @@
 <div class="profile-main">
   {{-- アイコンとユーザー情報（テーブル）をまとめるための新しいdivを追加 --}}
   <div class="profile-info-left">
-    <img src="{{asset('/storage/images/'.Auth::user()->images)}}" class="profile-user">
+    @if (Auth::user()->images && Auth::user()->images !== 'icon1.png')
+    {!! Form::image(asset('/storage/images/' . Auth::user()->images), 'submit', ['class' => 'user-image']) !!}
+    @else
+    {!! Form::image(asset('/images/icon1.png'), 'submit', ['class' => 'user-image']) !!}
+    @endif
 
     <div class="byYourself">
       <table>
@@ -36,7 +40,7 @@
 
 @foreach ($user->posts as $post)
 <div class="profile-block">
-  {!! Form::image('/images/icon2.png', 'submit', ['class' => 'profile-user']) !!}
+  {!! Form::image(asset('/storage/images/' . $post->user->images), 'submit', ['class' => 'profile-user']) !!}
   <div class="profile-line">
     <div class="profile-name">{{ $post->user->username }}</div>
     <div class="profile-post"> {{ $post->post }}</div>

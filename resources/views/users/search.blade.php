@@ -25,7 +25,11 @@
 
   <li class="user-item">
     <div class="user-body">
-      {!! Form::image('/images/icon7.png', 'submit', ['class' => 'allUser-image']) !!}
+      @if ($user->images && $user->images !== 'icon1.png')
+      {!! Form::image(asset('/storage/images/' .$user->images)) !!}
+      @else
+      {!! Form::image(asset('/images/icon1.png')) !!}
+      @endif
       <!--Userscontrollerから反映①-->
       {{ $user->username }}
     </div>

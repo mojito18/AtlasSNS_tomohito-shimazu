@@ -7,7 +7,11 @@
   {!! Form::open(['url' => '/post/create']) !!}
 
   <div class="text-form">
-    {!! Form::image('/images/icon1.png', 'submit', ['class' => 'user-image']) !!}
+    @if (Auth::user()->images && Auth::user()->images !== 'icon1.png')
+    {!! Form::image(asset('/storage/images/' . Auth::user()->images), 'submit', ['class' => 'user-image']) !!}
+    @else
+    {!! Form::image(asset('/images/icon1.png'), 'submit', ['class' => 'user-image']) !!}
+    @endif
     <!-- CSRF保護 -->
     {!! csrf_field() !!}
     <!-- 内容入力 -->
@@ -35,7 +39,7 @@
 <!--モーダル削除，編集ボタン　10/24-->
 <!-- 投稿ユーザーアイコン -->
 <div class="userBox">
-  {!! Form::image('/images/icon2.png', 'submit', ['class' => 'postUser-image']) !!}
+  {!! Form::image(('/storage/images/' . $post->user->images), 'submit', ['class' => 'postUser-image']) !!}
 
   <div class="nextBox">
     <!--投稿者の名前-->

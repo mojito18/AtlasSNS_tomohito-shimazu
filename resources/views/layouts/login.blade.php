@@ -34,7 +34,12 @@
                 <path d="M6 9l6 6 6-6" fill="none" stroke="#333" stroke-width="2" />
               </svg>
             </span>
+            <!--画像登録ができななかった場合にデフォルト画像を準備-->
+            @if (Auth::user()->images && Auth::user()->images !== 'icon1.png')
             <img src="{{asset('/storage/images/'.Auth::user()->images)}}" alt="プロフィール画像" width="30" height="30">
+            @else
+            <img src="{{ asset('/images/icon1.png') }}" alt="デフォルトアイコン" width="30" height="30">
+            @endif
           </p>
         </div>
         <ul class="menu js-accordion-content">
