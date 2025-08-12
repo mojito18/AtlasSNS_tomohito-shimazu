@@ -39,8 +39,11 @@
 <!--モーダル削除，編集ボタン　10/24-->
 <!-- 投稿ユーザーアイコン -->
 <div class="userBox">
-  {!! Form::image(('/storage/images/' . $post->user->images), 'submit', ['class' => 'postUser-image']) !!}
-
+  @if ($post->user->images && $post->user->images !== 'icon1.png')
+  {!! Form::image(asset('/storage/images/' .$post->user->images) ,'submit', ['class' => 'postUser-image']) !!}
+  @else
+  {!! Form::image(asset('/images/icon1.png') ,'submit',['class' => 'user-image']) !!}
+  @endif
   <div class="nextBox">
     <!--投稿者の名前-->
     <p class="postUser"> {{ $post->user->username }}</p>

@@ -40,7 +40,11 @@
 
 @foreach ($user->posts as $post)
 <div class="profile-block">
-  {!! Form::image(asset('/storage/images/' . $post->user->images), 'submit', ['class' => 'profile-user']) !!}
+  @if ($post->user->images && $post->user->images !== 'icon1.png')
+  {!! Form::image(asset('/storage/images/' .$post->user->images) ,'submit', ['class' => 'profile-user']) !!}
+  @else
+  {!! Form::image(asset('/images/icon1.png'),'submit',['class' => 'user-image'])!!}
+  @endif
   <div class="profile-line">
     <div class="profile-name">{{ $post->user->username }}</div>
     <div class="profile-post"> {{ $post->post }}</div>
