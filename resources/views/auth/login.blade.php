@@ -10,15 +10,15 @@
 
 <div class="form">
 
-  <div class="name-mail">{{ Form::label('e-mail') }}</div>
-  <div class="form-mail">{{ Form::text('mail',null,['class' => 'input']) }}
+  <div class="name-mail">{{ Form::label('e-mail','メールアドレス') }}</div>
+  <div class="form-mail">{{ Form::text('mail',null,['class' => 'input','placeholder' => 'メールアドレス']) }}
     @error('mail')
     <div class="alert alert-danger">{{ $message }}</div>
     @enderror
   </div>
 
-  <div class="name-password">{{ Form::label('password') }}</div>
-  <div class="form-password">{{ Form::password('password',['class' => 'input']) }}
+  <div class="name-password">{{ Form::label('password','パスワード') }}</div>
+  <div class="form-password">{{ Form::password('password',['class' => 'input','placeholder' => 'パスワード']) }}
     {{-- パスワードのバリデーションエラーメッセージ --}}
     @error('password')
     <div class="alert alert-danger">{{ $message }}</div>

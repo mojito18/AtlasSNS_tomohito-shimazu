@@ -233,6 +233,7 @@ header {
     width: 50px;
     height: 50px;
     margin-left: 80px;
+    border-radius: 5px;
 }
 
 .user-image {
@@ -364,7 +365,7 @@ header {
 }
 
 .followBtn {
-    background-color: #2597FA;
+    background-color: #1066cc;
     color: white;
     border-radius: 10px;
     width: 120px;
@@ -375,7 +376,7 @@ header {
 }
 
 .followerBtn {
-    background-color: #2597FA;
+    background-color: #1066cc;
     color: white;
     border-radius: 10px;
     width: 120px;
@@ -393,7 +394,7 @@ header {
 }
 
 .searchBtn {
-    background-color: #2597FA;
+    background-color: #1066cc;
     color: white;
     border-radius: 10px;
     width: 120px;
